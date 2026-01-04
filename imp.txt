@@ -1,0 +1,61 @@
+Our platform reduces misinformation impact by teaching citizens how to evaluate political claims independently — without telling them what to think.
+
+user report for :miss info gropus & community
+----| user auth |----
+  1: name    ---
+  2: email -----
+  3: phone no. ----
+  4: source :- like whatsapp,telegram,redit, newschannels, etc . **
+  5: details :- ai fact if miss info 
+
+real-time fact-checking using neutral APIs
+chatbots that answer queries on One Nation One Election  
+  1) Force users to evaluate ideas without knowing which side supports them.
+
+blockchain for transparent verification of shared content to prevent deepfakes
+
+Create interactive quizzes and AR simulations where users role-play voting scenarios, earning badges for spotting misinformation tactics like emotional manipulation.
+
+Deploy ---|browser extensions|---- with ML models trained on neutral datasets to flag election-related fakes in real-time, providing side-by-side fact-checks.
+
+For One Nation One Election, generate personalized explainers via voice assistants in regional languages,
+
+
+Verifiable Neutrality Framework (Judges Care About This)
+
+Open-source fact sources list
+Clear rule: no political actor names in analysis
+Public audit log of content changes
+“Explain why this output was generated” button
+
+
+tech stack 
+
+Team Role Split (No Overlap, No Chaos)
+Person 1 – Frontend + UX
+Claim input screen
+Blind comparison UI
+Results visualization (icons, progress bars)
+
+Person 2 – Backend + API
+FastAPI endpoints
+Prompt orchestration
+Response structuring
+
+Person 3 – AI Logic + Neutrality
+Prompt design
+Fallacy taxonomy
+Neutrality framework slide
+If one person tries to do two roles, your output quality drops.
+
+
+
+They say:
+
+“This feels misleading / unclear”
+Your system then shows:
+how many users found it confusing
+what manipulation patterns were detected
+where context is missing
+
+

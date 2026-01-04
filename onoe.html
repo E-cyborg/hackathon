@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Nation One Election - VoterGuard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins, Noto Sans, sans-serif';
+            line-height: 1.6;
+            color: #2c1810;
+            background: linear-gradient(135deg, #fff8f0 0%, #f4e4d9 50%, #e8d5c4 100%);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(135deg, #d4a574 0%, #b8956e 50%, #8b6f47 100%);
+            color: #fff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(139,111,71,0.3);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        /* Language Toggle Button */
+        .lang-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        .lang-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        .hero {
+            background: linear-gradient(rgba(212,165,116,0.95), rgba(184,149,110,0.95));
+            color: #2c1810;
+            text-align: center;
+            padding: 160px 20px 100px;
+            margin-top: 80px;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: #8b4513;
+            font-weight: 400;
+        }
+        .onoe-timeline {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 50px rgba(139,111,71,0.15);
+        }
+        .timeline-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #8b4513;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .country-card {
+            background: rgba(255,255,255,0.85);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 6px solid #ff6b35;
+            box-shadow: 0 10px 40px rgba(139,111,71,0.1);
+            transition: all 0.3s;
+        }
+        .country-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(139,111,71,0.2);
+        }
+        .country-name {
+            font-size: 1.6rem;
+            color: #8b4513;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .amendments-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #fffaf5 0%, #f8f1e9 100%);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #8b4513;
+            font-weight: 700;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #d4a574, #ff6b35);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        .amendments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .amendment-card {
+            background: rgba(255,255,255,0.9);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(139,111,71,0.1);
+            border-top: 5px solid #28a745;
+            position: relative;
+        }
+        .article-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .process-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .step {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(255,255,255,0.85);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(139,111,71,0.1);
+            transition: all 0.3s;
+        }
+        .step:hover {
+            transform: scale(1.05);
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255,107,53,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+        }
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255,107,53,0.6);
+        }
+        .neutrality-badge {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(40,167,69,0.4);
+        }
+        /* Hindi Font */
+        .lang-hi * {
+            font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif !important;
+        }
+        .lang-hi .country-name, .lang-hi .section-title, .lang-hi h1, .lang-hi h3 {
+            font-family: 'Noto Sans Devanagari', sans-serif !important;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .process-steps { flex-direction: column; }
+            .countries-grid, .amendments-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">VoterGuard</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#countries">Global</a></li>
+                <li><a href="#amendments">Constitution</a></li>
+                <li><a href="#process">Implementation</a></li>
+                <li><button class="lang-toggle" onclick="toggleLanguage()" id="langBtn">हिंदी</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1 id="hero-title">One Nation One Election</h1>
+            <p class="hero-subtitle" id="hero-subtitle">Synchronized Lok Sabha & State Assembly elections every 5 years</p>
+            <div class="onoe-timeline">
+                <h2 class="timeline-title" id="timeline-title">Historical Context</h2>
+                <p style="font-size: 1.2rem; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;" id="timeline-text">
+                    India practiced simultaneous elections from 1951-1967. Mid-term polls disrupted the cycle.
+                    <br><strong>Proposed restart post-2029</strong> via constitutional amendments.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="countries" class="amendments-section">
+        <div class="container">
+            <h2 class="section-title" id="countries-title">Countries Practicing Simultaneous Elections</h2>
+            <div class="countries-grid">
+                <div class="country-card">
+                    <div class="country-name" id="sweden-name">Sweden</div>
+                    <p id="sweden-desc"><strong>All levels synced every 4 years</strong> since 1970. National, regional, municipal elections on single day. Voter turnout: 84.2%.</p>
+                </div>
+                <div class="country-card">
+                    <div class="country-name" id="safrica-name">South Africa</div>
+                    <p id="safrica-desc"><strong>National & Provincial legislatures</strong> every 5 years. Managed 26.8 million voters successfully in 2024.</p>
+                </div>
+                <div class="country-card">
+                    <div class="country-name" id="belgium-name">Belgium</div>
+                    <p id="belgium-desc"><strong>Federal & Regional elections</strong> synchronized. Handles complex federal structure similar to India's diversity.</p>
+                </div>
+                <div class="country-card">
+                    <div class="country-name" id="nepal-name">Nepal</div>
+                    <p id="nepal-desc"><strong>Post-2015 Constitution</strong> implemented in phases. Shows feasibility for large, diverse democracies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="amendments" class="amendments-section" style="background: linear-gradient(to bottom, #f8f1e9 0%, #fffaf5 100%);">
+        <div class="container">
+            <h2 class="section-title" id="amendments-title">Required Constitutional Amendments</h2>
+            <div class="amendments-grid">
+                <div class="amendment-card">
+                    <div class="article-number">Article 83</div>
+                    <h3 style="margin-top: 20px; color: #8b4513;" id="art83-title">Lok Sabha Term</h3>
+                    <p id="art83-desc">Fixed 5-year terms with synchronization clause. Mid-term elections trigger cycle reset for all states.</p>
+                </div>
+                <div class="amendment-card">
+                    <div class="article-number">Article 172</div>
+                    <h3 style="margin-top: 20px; color: #8b4513;" id="art172-title">State Assemblies</h3>
+                    <p id="art172-desc">Aligns state terms with Lok Sabha. Prevents premature dissolution disrupting national cycle.</p>
+                </div>
+                <div class="amendment-card">
+                    <div class="article-number">Article 327/329</div>
+                    <h3 style="margin-top: 20px; color: #8b4513;" id="art327-title">Election Commission Powers</h3>
+                    <p id="art327-desc">ECI authority to notify synchronized poll dates and manage cycle resets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="amendments-section">
+        <div class="container">
+            <h2 class="section-title" id="process-title">Implementation Process</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 id="step1-title">Two Constitutional Bills</h3>
+                    <p id="step1-desc">Special majority (2/3rd) in both Houses of Parliament required.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 id="step2-title">State Ratification</h3>
+                    <p id="step2-desc">50% state legislatures must approve federal structure changes.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 id="step3-title">Cycle Reset 2029</h3>
+                    <p id="step3-desc">Post-2029 elections restart synchronized cycle for 30+ years.</p>
+                </div>
+            </div>
+            <a href="index.html" class="cta-button">Test Fact-Checking Demo</a>
+        </div>
+    </section>
+
+    <div class="neutrality-badge">
+        100% Neutral ONOE Information
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        
+        const translations = {
+            en: {
+                heroTitle: "One Nation One Election",
+                heroSubtitle: "Synchronized Lok Sabha & State Assembly elections every 5 years",
+                timelineTitle: "Historical Context",
+                timelineText: "India practiced simultaneous elections from 1951-1967. Mid-term polls disrupted the cycle.<br><strong>Proposed restart post-2029</strong> via constitutional amendments.",
+                countriesTitle: "Countries Practicing Simultaneous Elections",
+                sweden: { name: "Sweden", desc: "<strong>All levels synced every 4 years</strong> since 1970. National, regional, municipal elections on single day. Voter turnout: 84.2%." },
+                safrica: { name: "South Africa", desc: "<strong>National & Provincial legislatures</strong> every 5 years. Managed 26.8 million voters successfully in 2024." },
+                belgium: { name: "Belgium", desc: "<strong>Federal & Regional elections</strong> synchronized. Handles complex federal structure similar to India's diversity." },
+                nepal: { name: "Nepal", desc: "<strong>Post-2015 Constitution</strong> implemented in phases. Shows feasibility for large, diverse democracies." },
+                amendmentsTitle: "Required Constitutional Amendments",
+                art83: { title: "Lok Sabha Term", desc: "Fixed 5-year terms with synchronization clause. Mid-term elections trigger cycle reset for all states." },
+                art172: { title: "State Assemblies", desc: "Aligns state terms with Lok Sabha. Prevents premature dissolution disrupting national cycle." },
+                art327: { title: "Election Commission Powers", desc: "ECI authority to notify synchronized poll dates and manage cycle resets." },
+                processTitle: "Implementation Process",
+                step1: { title: "Two Constitutional Bills", desc: "Special majority (2/3rd) in both Houses of Parliament required." },
+                step2: { title: "State Ratification", desc: "50% state legislatures must approve federal structure changes." },
+                step3: { title: "Cycle Reset 2029", desc: "Post-2029 elections restart synchronized cycle for 30+ years." },
+                langBtn: "हिंदी"
+            },
+            hi: {
+                heroTitle: "एक राष्ट्र एक चुनाव",
+                heroSubtitle: "लोकसभा और राज्य विधानसभाओं का हर 5 साल में एक साथ चुनाव",
+                timelineTitle: "ऐतिहासिक संदर्भ",
+                timelineText: "भारत ने 1951-1967 तक एक साथ चुनाव कराए थे। बीच में समय से पहले चुनावों ने चक्र तोड़ दिया।<br><strong>संवैधानिक संशोधनों से 2029 के बाद पुनः प्रारंभ</strong>।",
+                countriesTitle: "एक साथ चुनाव कराने वाले देश",
+                sweden: { name: "स्वीडन", desc: "<strong>सभी स्तर हर 4 साल में एक साथ</strong> 1970 से। राष्ट्रीय, क्षेत्रीय, नगरपालिका चुनाव एक ही दिन। मतदाता उपस्थिति: 84.2%।" },
+                safrica: { name: "दक्षिण अफ्रीका", desc: "<strong>राष्ट्रीय और प्रांतीय विधानसभाएं</strong> हर 5 साल में। 2024 में 26.8 मिलियन मतदाताओं का सफल प्रबंधन।" },
+                belgium: { name: "बेल्जियम", desc: "<strong>संघीय और क्षेत्रीय चुनाव</strong> एक साथ। भारत जैसी विविध संघीय संरचना का प्रबंधन।" },
+                nepal: { name: "नेपाल", desc: "<strong>2015 संविधान के बाद</strong> चरणों में लागू। बड़े विविध लोकतंत्रों के लिए संभाव्यता दर्शाता है।" },
+                amendmentsTitle: "आवश्यक संवैधानिक संशोधन",
+                art83: { title: "लोकसभा कार्यकाल", desc: "5 वर्षीय निश्चित कार्यकाल समन्वय खंड के साथ। बीच के चुनाव सभी राज्यों के लिए चक्र रीसेट करेंगे।" },
+                art172: { title: "राज्य विधानसभाएं", desc: "राज्य कार्यकाल लोकसभा से जोड़ेगा। समय से पहले विघटन राष्ट्रीय चक्र को बाधित नहीं करेगा।" },
+                art327: { title: "चुनाव आयोग शक्तियां", desc: "ईसीआई को समन्वित चुनाव तिथियां अधिसूचित करने और चक्र प्रबंधन का अधिकार।" },
+                processTitle: "कार्यान्वयन प्रक्रिया",
+                step1: { title: "दो संवैधानिक विधेयक", desc: "संसद के दोनों सदनों में विशेष बहुमत (2/3) आवश्यक।" },
+                step2: { title: "राज्य अनुमोदन", desc: "50% राज्य विधानसभाओं को संघीय संरचना परिवर्तन स्वीकृति देनी होगी।" },
+                step3: { title: "2029 चक्र पुनरारंभ", desc: "2029 के बाद चुनाव 30+ वर्षों के लिए समन्वित चक्र पुनः शुरू करेंगे।" },
+                langBtn: "English"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            document.body.className = currentLang === 'hi' ? 'lang-hi' : '';
+            document.getElementById('langBtn').textContent = translations[currentLang].langBtn;
+            
+            // Update all text
+            Object.keys(translations[currentLang]).forEach(key => {
+                const elements = document.querySelectorAll(`[id$='-${key.split('.')[0]}']`);
+                elements.forEach(el => {
+                    if (key.includes('.')) {
+                        const subKey = key.split('.')[1];
+                        el.innerHTML = translations[currentLang][key.split('.')[0]][subKey];
+                    } else {
+                        el.textContent = translations[currentLang][key];
+                    }
+                });
+            });
+            
+            // Specific ID updates
+            document.getElementById('hero-title').textContent = translations[currentLang].heroTitle;
+            document.getElementById('hero-subtitle').textContent = translations[currentLang].heroSubtitle;
+            document.getElementById('timeline-title').textContent = translations[currentLang].timelineTitle;
+            document.getElementById('timeline-text').innerHTML = translations[currentLang].timelineText;
+            document.getElementById('countries-title').textContent = translations[currentLang].countriesTitle;
+            document.getElementById('amendments-title').textContent = translations[currentLang].amendmentsTitle;
+            document.getElementById('process-title').textContent = translations[currentLang].processTitle;
+        }
+    </script>
+</body>
+</html>
